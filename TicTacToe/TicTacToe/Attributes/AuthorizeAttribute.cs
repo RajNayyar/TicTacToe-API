@@ -20,11 +20,11 @@ namespace TicTacToe
             string Token = context.HttpContext.Request.Headers["AccessToken"].ToString();
             if (string.IsNullOrEmpty(Token))
             {
-                throw new UnauthorizedAccessException("Api Key not passed");
+                throw new UnauthorizedAccessException("Access Token not passed");
             }
             else if(repo.IsAccessTokenValid(Token)==false)
             {
-                throw new Exception("Invalid APIkey");
+                throw new Exception("Invalid AccessToken");
             }
            
         }

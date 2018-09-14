@@ -8,20 +8,16 @@ namespace TicTacToe
     [Exception]
     public class Game
     {
-        static string playerOne = "";
-        static string playerTwo = "";
+        public static string playerOne = "";
+        public static string playerTwo = "";
         List<List<int>> WinningPOS = new List<List<int>>();
         static int[] checkboard = new int[9];
         static int turnOf = 1;
-        int gameOver = 0;
-        int draw = 0;
-        int blankCount = 0;
+        static int gameOver = 0;
+        public static string GameStatus = "In Progress";
         public string game(string accesstoken, int move)
         {
-            if(gameOver==1)
-            {
-                return "GAME OVER! START A NEW GAME!!";
-            }
+            GameStatus = "In Progress";
             WinningPOSBoard();
             if(accesstoken!= playerOne && accesstoken!= playerTwo && (playerOne!="" && playerTwo!=""))
             {
@@ -35,7 +31,6 @@ namespace TicTacToe
             {
                 playerTwo = accesstoken;
             }
-
 
             if(turnOf == 1 && accesstoken == playerOne )
             {
@@ -92,23 +87,33 @@ namespace TicTacToe
             {
                 playerOne = "";
                 playerTwo = "";
-                gameOver = 1;
+               // gameOver = 1;
                 turnOf = 1;
-                return "Player One" + " Won";
+                checkboard = new int[9];
+                GameStatus = "Not In Progress";
+                return "Player One" + " Won.. Game About to refresh";
             }
             if(count2 == 3)
             {
                 playerOne = "";
                 playerTwo = "";
-                gameOver = 1;
+               // gameOver = 1;
                 turnOf = 1;
-                return "player Two" + " Won";
+                checkboard = new int[9];
+                GameStatus = "Not In Progress";
+                return "player Two" + " Won.. Game About to refresh";
             }
             if(count0==0)
             {
+                playerOne = "";
+                playerTwo = "";
+                // gameOver = 1;
+                turnOf = 1;
+                checkboard = new int[9];
+                GameStatus = "Not In Progress";
                 return "Game draw";
             }
-            return "Game in Progress";
+            return "Move Completed Successful";
         }
 
         private void WinningPOSBoard()
@@ -129,9 +134,7 @@ namespace TicTacToe
             WinningPOS.Add(pos5);
             WinningPOS.Add(pos6);
             WinningPOS.Add(pos7);
-
         }
-
 
         private int fillGameBoard(int turnOf, int move)
         {

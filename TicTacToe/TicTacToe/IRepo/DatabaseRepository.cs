@@ -29,7 +29,7 @@ namespace TicTacToe
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.StackTrace);
+                throw new Exception(e.StackTrace);
             }
             finally
             {

@@ -19,15 +19,15 @@ namespace TicTacToe
                 // string query = "Insert into User( Name , UserName , AccessToken ) values"+"'@name'"+" "+"''"
                 string query = "Insert into  Logger (Request , Response, Exception ) values (@request , @response, @exception )";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.Add(new SqlParameter("@request", log.Response));
-                sqlCommand.Parameters.Add(new SqlParameter("@response", log.Request));
+                sqlCommand.Parameters.Add(new SqlParameter("@request", log.Request));
+                sqlCommand.Parameters.Add(new SqlParameter("@response", log.Response));
                 sqlCommand.Parameters.Add(new SqlParameter("@exception", log.Exception));
                 sqlCommand.ExecuteNonQuery();
                 Console.WriteLine("Data Saved");
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.StackTrace);
+               throw new Exception (e.StackTrace);
             }
             finally
             {

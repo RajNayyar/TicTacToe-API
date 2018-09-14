@@ -18,14 +18,17 @@ namespace TicTacToe.Controllers
         List<User> AllUsers = new List<User>();
         IRepository repo;
 
+        [Logging]
+        [Exception]
         [HttpPost]
-        public void CreateUser1([FromBody]User x)
+        public string CreateUser1([FromBody]User x)
         {
             GenerateToken token = new GenerateToken();
             var AccessToken = token.GenerateTokenId(x.UserName);
             x.AccessToken = AccessToken;
             IRepository repo = new DatabaseRepository();
             repo.CreateUser(x);
+            return AccessToken;
         }
 
         [Authorize]

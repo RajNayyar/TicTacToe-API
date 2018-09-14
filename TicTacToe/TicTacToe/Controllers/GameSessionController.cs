@@ -23,5 +23,21 @@ namespace TicTacToe.Controllers
            string result = game.game(HttpContext.Request.Headers["AccessToken"].ToString(), move);
            return result;
         }
+        
+        [Authorize]
+        [Logging]
+        [Exception]
+        [HttpGet]
+        public Status CheckStatus()
+        {
+            Status status = new Status();
+            status.PlayerOne = Game.playerOne;
+            status.PlayerTwo = Game.playerTwo;
+            status.GameStatus = Game.GameStatus;
+            return status;
+
+        }
     }
+
+  
 }
